@@ -10,57 +10,124 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar scroll</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Web Calculator</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Link
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                            <a class="nav-link" aria-current="page" href="#">Basic Calculator</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
+                            <a class="nav-link disabled" aria-current="page" href="#">Advanced Calculator</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" aria-current="page" href="#">Scientific Calculator</a>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
+
             </div>
         </nav>
     </header>
     <main>
-        <div id="calculator-container">
-            <div> </div>
-            <div> </div>
-            <div> </div>
-            <div> </div>
+        <div id="calculator-container" class="container my-5">
+            <h2 class="text-center">Basic Calculator</h2>
+            <div class="calculator__display mx-auto w-75 border rounded-2 border-3">
+                <p class="calculator__display__formula text-end m-0 me-5 fs-5">38 × 100</p>
+                <p class="calculator__display__screen text-end m-0 me-5 fs-2">3800</p>
+            </div>
+            <div class="calculator__input row justify-content-md-center mx-auto w-75 border rounded-2 border-3 border-top-0">
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">%</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">√</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">x²</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">x³</button>
+                </div>
+                <div class="w-100"></div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">CE</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">C</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">⌫</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">÷</button>
+                </div>
+                <div class="w-100"></div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">7</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">8</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">9</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">×</button>
+                </div>
+                <div class="w-100"></div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">4</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">5</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">6</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">−</button>
+                </div>
+                <div class="w-100"></div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">1</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">2</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">3</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">+</button>
+                </div>
+                <div class="w-100"></div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">±</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn text-center rounded-2 border p-0">0</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">,</button>
+                </div>
+                <div class="calculator__input__button text-center col p-0 m-1">
+                    <button class="btn btn--grey text-center rounded-2 border p-0">=</button>
+                </div>
+                <div class="w-100"></div>
+            </div>
         </div>
     </main>
-    <footer>
-        <p class="footer__copyright">Copyright &copy; 2021</p>
+    <footer class="bg-dark">
+        <p class="text-center text-white py-4 fs-5 fw-bolder">Copyright &copy; 2021</p>
     </footer>
 </body>
 

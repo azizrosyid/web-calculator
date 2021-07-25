@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;600;500;700&display=swap');
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+.calculator__display {
+    max-width: 500px;
+}
+
+.calculator__display > * {
+    min-height: 50px;
+    line-height: 50px;
+}
+
+.calculator__input {
+    max-width: 500px;
+}
+
+.btn--grey{
+    background-color: #e6e6e6;
+}
+
+.calculator__input__button button {
+    width: 70px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .calculator__display {
+        width: 90%;
+    }
+
+    .calculator__input {
+        width: 90%;
+    }
+}

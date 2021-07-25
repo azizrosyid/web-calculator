@@ -1,12 +1,13 @@
-const { merge } = require("webpack-merge");
-const WebpackBundleAnalyzer = require("webpack-bundle-analyzer");
-const common = require("./webpack.common.js");
+/* eslint-disable import/no-extraneous-dependencies */
+const { merge } = require('webpack-merge');
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
+const common = require('./webpack.common');
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: 'production',
   optimization: {
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
       minSize: 20000,
       minRemainingSize: 0,
       minChunks: 1,
@@ -29,9 +30,9 @@ module.exports = merge(common, {
   },
   plugins: [
     new WebpackBundleAnalyzer.BundleAnalyzerPlugin({
-      analyzerMode: "static",
-      reportFilename: "report.html",
-      defaultSizes: "parsed",
+      analyzerMode: 'static',
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed',
       openAnalyzer: true,
     }),
   ],
@@ -41,9 +42,9 @@ module.exports = merge(common, {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ['@babel/preset-env'],
           },
         },
       },
