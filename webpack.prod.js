@@ -1,14 +1,28 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const { merge } = require('webpack-merge');
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
+const TerserPlugin = require('terser-webpack-plugin');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
   mode: 'production',
   optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
+
     splitChunks: {
       chunks: 'all',
       minSize: 20000,
+      maxSize: 50000,
       minRemainingSize: 0,
       minChunks: 1,
       maxAsyncRequests: 30,
