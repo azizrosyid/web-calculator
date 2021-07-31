@@ -1,6 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const glob = require('glob');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+
+const PATHS = {
+  src: path.join(__dirname, 'src'),
+};
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/scripts/index.js'),
@@ -14,9 +21,8 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
-
           {
             loader: 'css-loader',
           },
@@ -29,6 +35,12 @@ module.exports = {
       template: path.resolve(__dirname, 'src/templates/index.html'),
       filename: path.resolve(__dirname, 'build/index.html'),
       inject: 'body',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
+    new PurgecssPlugin({
+      paths: () => glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
     }),
   ],
 };

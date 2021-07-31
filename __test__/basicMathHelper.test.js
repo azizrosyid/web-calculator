@@ -1,4 +1,4 @@
-import Math from "../src/scripts/utils/math-initiator";
+import Math from "../src/scripts/utils/basic-math-helper";
 
 describe("should call chain before type formula", () => {
   const math = new Math();

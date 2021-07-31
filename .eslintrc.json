@@ -10,6 +10,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-underscore-dangle": 0
+    "no-underscore-dangle": 0,
+    "no-extraneouse-dependencies": 0
   }
 }
