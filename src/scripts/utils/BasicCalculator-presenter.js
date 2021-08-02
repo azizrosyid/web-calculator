@@ -90,12 +90,18 @@ class BasicCalculatorPresenter {
   }
 
   _handleEqualButton() {
-    const formula = this._resultScreen.innerText;
-    this._formulaScreen.innerText = formula;
-
-    if (formula === '') return;
-
-    this._resultScreen.innerText = this._math.solveEquation(formula);
+    try {
+      const formula = this._resultScreen.innerText;
+      this._formulaScreen.innerText = formula;
+      if (formula === '') return;
+      this._resultScreen.innerText = this._math.solveEquation(formula);
+    } catch (error) {
+      if (error.message === 'Division by zero') {
+        this._resultScreen.innerText = 'Error: Division by zero';
+        return;
+      }
+      this._resultScreen.innerText = 'Error: Invalid formula';
+    }
   }
 
   _handleNegationButton() {

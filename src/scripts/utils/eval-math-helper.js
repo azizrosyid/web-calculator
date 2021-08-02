@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Decimal from 'decimal.js';
 
 class EvaluateMathHelper {
@@ -17,9 +18,21 @@ class EvaluateMathHelper {
       '**': (a, b) => new Decimal(a).pow(b),
     };
 
+    this._symbolToReplace = {
+      '×': '*',
+      '÷': '/',
+      '²': '**2',
+      '³': '**3',
+      '−': '-',
+      '%': '/100',
+    };
+
     this.solverArray = this.solverArray.bind(this);
     this.solveEquation = this.solveEquation.bind(this);
     this.replaceSymbol = this.replaceSymbol.bind(this);
+    this.solvePower = this.solvePower.bind(this);
+    this.solveSqrt = this.solveSqrt.bind(this);
+    this.splitByOperation = this.splitByOperation.bind(this);
   }
 
   solverArray(arrEquation) {
@@ -39,14 +52,6 @@ class EvaluateMathHelper {
 
   replaceSymbol(equation) {
     let result = equation;
-    this._symbolToReplace = {
-      '×': '*',
-      '÷': '/',
-      '²': '**2',
-      '³': '**3',
-      '−': '-',
-      '%': '/100',
-    };
 
     Object.entries(this._symbolToReplace).forEach(([key, value]) => {
       result = result.replace(new RegExp(key, 'gi'), value);
@@ -54,35 +59,45 @@ class EvaluateMathHelper {
     return result;
   }
 
+  solvePower(equationWithoutSymbols) {
+    const resultEquationPower = equationWithoutSymbols.replace(/(\d*\*\*\d)/gi, (match) => {
+      const [a, operator, b] = match.split(/(\*\*)/);
+      return this.operations[operator](parseFloat(a), parseFloat(b));
+    });
+    return resultEquationPower;
+  }
+
+  solveSqrt(equationWithoutSymbols) {
+    const resultEquationSqrt = equationWithoutSymbols.replace(/√\d*/gi, (match) => {
+      const operator = match[0];
+      const number = match.substring(1);
+      return this.operations[operator](1, number);
+    });
+    return resultEquationSqrt;
+  }
+
+  splitByOperation(equationWithoutSymbols) {
+    const result = equationWithoutSymbols.split(/(\+|-)/gi).map((eq1) => eq1.trim().split(/(\*|\/)/gi).map((eq2) => eq2.trim()));
+    return result;
+  }
+
   solveEquation(equation) {
-    try {
-      let eq = this.replaceSymbol(equation.trim());
-      eq = eq.replace(/(\d*\*\*\d)/gi, (match) => {
-        const [a, operator, b] = match.split(/(\*\*)/);
-        return this.operations[operator](parseFloat(a), parseFloat(b));
-      });
-      eq = eq.replace(/√\d*/gi, (match) => {
-        const operator = match[0];
-        const number = match.substring(1);
-        return this.operations[operator](1, number);
-      });
-      eq = eq.split(/(\+|-)/gi).map((eq1) => eq1.trim().split(/(\*|\/)/gi).map((eq2) => eq2.trim()));
-      if (eq[0].length === 1 && eq.length === 1) {
-        return eq[0][0];
-      }
+    const equationWithoutSymbols = this.replaceSymbol(equation.trim());
+    const resultEquationPower = this.solvePower(equationWithoutSymbols);
+    const resultEquationSqrt = this.solveSqrt(resultEquationPower);
+    const equationSplitByOperator = this.splitByOperation(resultEquationSqrt);
 
-      const solveMultiplyDivide = eq.map(this.solverArray);
-      const solvePlusMinus = this.solverArray(solveMultiplyDivide);
-      const result = solvePlusMinus.toNumber();
-      if (Number.isNaN(result)) throw new Error('Invalid equation');
-
-      return result;
-    } catch (error) {
-      if (error.message === 'Division by zero') {
-        return 'Error! Cannot divide by zero!';
-      }
-      return 'Error! Cannot solve equation!';
+    if (equationSplitByOperator[0].length === 1 && equationSplitByOperator.length === 1) {
+      return equationSplitByOperator[0][0];
     }
+
+    const solveMultiplyDivide = equationSplitByOperator.map(this.solverArray);
+    const solvePlusMinus = this.solverArray(solveMultiplyDivide);
+    const result = solvePlusMinus.toNumber();
+
+    if (Number.isNaN(result)) throw new Error('Invalid equation');
+
+    return result;
   }
 }
 
